@@ -1,0 +1,78 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estiliza o título da página de login */
+h1 {
+    font-size: 28px;
+    color: #4e73df;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estiliza o formulário de login */
+form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Estiliza os rótulos dos inputs */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #4e73df;
+    font-weight: bold;
+}
+
+/* Estiliza os campos de entrada de texto */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Estiliza o botão de login */
+form button[type="submit"] {
+    background-color: #4e73df;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito hover no botão de login */
+form button[type="submit"]:hover {
+    background-color: #2e59d9;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+}

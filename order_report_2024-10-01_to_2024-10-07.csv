@@ -1,0 +1,4 @@
+order_id,order_status,shipping_date,total_amount
+216,Shipped,2024-10-02,50000.00
+217,Shipped,2024-10-07,0.00
+218,Canceled,2024-10-01,0.00

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Admin</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Se você tiver um CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <script src="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.umd.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <style>
+    #salesChart {
+        margin: 20px auto;
+        width: 90%;
+        max-width: 800px;
+    }
+</style>
+</head>
+
+<body>
+    <header>
+        <h1>E-commerce Dashboard</h1>
+        {{ user_html }}
+    </header>
+    <div class="sidebar">
+        <div class="logo">
+            <a href="/admin">Minha Loja</a> <!-- Link para o dashboard ou página inicial -->
+        </div>
+        <nav>
+            <ul>
+               
+                <li><a class="nav-link" data-url="/lista_de_pedidos" href="#">Gerenciar Pedidos</a></li>
+               {{ store }}
+              
+                <li><a href="/logout">Sair</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+
+    <main>
+        <div  id="content-area">
+        <h2>Resumo das Atividades</h2>
+        <div class="dashboard-cards">
+            {{ stats_html }}
+            
+        </div>
+    
+    </main>
+</div>
+    <footer>
+        <p>&copy; 2024 E-commerce. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        // Função para carregar conteúdo dinâmico
+        document.addEventListener('click', function(event) {
+    var target = event.target;
+    if (target.classList.contains('nav-link') || target.closest('.nav-link')) {
+        event.preventDefault(); // Previne o redirecionamento padrão
+
+        var link = target.closest('.nav-link');
+        var url = link.getAttribute('data-url'); // Obtém a URL do data-url
+
+        // Faz a requisição AJAX (fetch)
+        fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } }) // Cabeçalho AJAX
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(html) {
+                document.getElementById('content-area').innerHTML = html;
+            })
+            .catch(function(error) {
+                console.error('Erro ao carregar a página:', error);
+            });
+    }
+});
+
+
+// Função para mostrar o modal e definir o ID do usuário a ser deletado
+function Modal(userId) {
+                    document.getElementById('deleteUserModal').style.display = 'block';
+                    document.getElementById('deleteUser').value = userId;
+                    document.getElementById('modalMessage').textContent = 'Tem certeza que deseja deletar o usuário com ID ' + userId + '?';
+                }
+
+                // Função para fechar o modal
+                function closeModal_user() {
+                    document.getElementById('deleteUserModal').style.display = 'none';
+                }
+
+                // Fecha o modal se clicar fora dele
+                window.onclick = function(event) {
+                    if (event.target == document.getElementById('deleteModal')) {
+                        closeModal_user();
+                    }
+                }
+
+
+// Função para mostrar o modal e definir o ID do produto a ser deletado
+function showModal(productId) {
+                    document.getElementById('deleteModalProduct').style.display = 'block';
+                    document.getElementById('deleteProduct').value = productId;
+                    document.getElementById('modalMessage').textContent = 'Tem certeza que deseja deletar o produto com ID ' + productId + '?';
+                }
+
+                // Função para fechar o modal
+                function closeModal() {
+                    document.getElementById('deleteModalProduct').style.display = 'none';
+                }
+
+                // Fecha o modal se clicar fora dele
+                window.onclick = function(event) {
+                    if (event.target == document.getElementById('deleteModal')) {
+                        closeModal();
+                    }
+                }
+
+
+
+// Função para mostrar o modal e definir o ID do slid a ser deletado
+                function showModalSlid(productId) {
+                    document.getElementById('deleteModalSlid').style.display = 'block';
+                    document.getElementById('deleteSlid').value = productId;
+                    document.getElementById('modalMessage').textContent = 'Tem certeza que deseja deletar o slid com ID ' + productId + '?';
+                }
+
+                // Função para fechar o modal
+                function closeModalSlid() {
+                    document.getElementById('deleteModalSlid').style.display = 'none';
+                }
+
+                // Fecha o modal se clicar fora dele
+                window.onclick = function(event) {
+                    if (event.target == document.getElementById('deleteModalSlid')) {
+                        closeModalSlid();
+                    }
+                }
+// Função para mostrar o modal e definir o ID do categoria a ser deletada
+                function showModalCat(productId) {
+                    document.getElementById('deleteModalCat').style.display = 'block';
+                    document.getElementById('deleteCat').value = productId;
+                    document.getElementById('modalMessage').textContent = 'Tem certeza que deseja deletar o slid com ID ' + productId + '?';
+                }
+
+                // Função para fechar o modal
+                function closeModalCat() {
+                    document.getElementById('deleteModalCat').style.display = 'none';
+                }
+
+                // Fecha o modal se clicar fora dele
+                window.onclick = function(event) {
+                    if (event.target == document.getElementById('deleteModalCat')) {
+                        closeModalCat();
+                    }
+                }
+
+
+
+            
+      
+      
+</script>
+
+<script>
+    // Função para inserir o editor onde desejado
+
+    function insertTextarea() {
+        const container = document.getElementById("description-container");
+
+        // Verifica se o container está presente e se o textarea ainda não foi criado
+        if (container && !document.getElementById("dynamic-description")) {
+            // Cria o textarea
+            const textarea = document.createElement("textarea");
+            textarea.id = "dynamic-description";
+            textarea.name = "description";
+            textarea.placeholder = "Escreva a descrição do produto aqui...";
+            container.appendChild(textarea);
+            const {
+             ClassicEditor,
+             Essentials,
+             Bold,
+             Italic,
+             Font,
+             Paragraph
+            } = CKEDITOR;    
+            // Inicializa o CKEditor 5 no textarea recém-criado
+            ClassicEditor
+                .create(document.querySelector('#dynamic-description'), {
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    toolbar: [
+                  'undo', 'redo', '|', 'bold', 'italic', '|',
+             'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                ]
+                })
+                .then(editor => {
+                    console.log('Editor inicializado', editor);
+                })
+                .catch(error => {
+                    console.error('Erro ao inicializar o editor:', error);
+                });
+              
+        }
+    }
+
+  
+  
+   
+</script>
+<script src="js/graphic.js"></script>
+</body>
+</html>
