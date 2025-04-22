@@ -34,7 +34,7 @@ Banco de dados MariaDB
 
 Estrutura própria no padrão MVC
 
-XAMPP como servidor local
+
 
 🎯 Objetivo
 Fornecer uma solução administrativa completa e leve, totalmente customizável, com controle total do código, ideal para estudo e evolução prática no desenvolvimento web.
