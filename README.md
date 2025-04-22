@@ -1,4 +1,5 @@
 📊 E-comerce Admin – Painel Administrativo para Loja Virtual
+
 Este repositório é responsável pelo Painel Administrativo do sistema de E-commerce desenvolvido com Python puro, HTML, CSS e JavaScript, sem frameworks. Ele oferece ferramentas para gerenciamento completo da loja, controle de vendas, usuários e relatórios, com uma interface moderna e funcional.
 
 ✅ Funcionalidades do Painel Admin
